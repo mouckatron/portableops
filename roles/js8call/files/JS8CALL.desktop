@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=JS8CALL
+Comment=Weak Signal chat
+Exec=/usr/bin/js8call
+Type=Application
+Encoding=UTF-8
+Terminal=false

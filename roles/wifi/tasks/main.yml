@@ -1,0 +1,6 @@
+- copy:
+    src: wpa_supplicant.conf
+    dest: /etc/wpa_supplicant/wpa_supplicant.conf
+    mode: 0644
+    owner: root
+    group: root

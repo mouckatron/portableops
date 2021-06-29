@@ -1,0 +1,59 @@
+- apt:
+    name:
+      - hostapd
+      - dnsmasq
+      - dns-root-data
+    state: latest
+
+- systemd:
+    name: hostapd
+    enabled: false
+    masked: false
+
+- systemd:
+    name: dnsmasq
+    enabled: false
+
+- template:
+    src: hostapd.conf
+    dest: /etc/hostapd/hostapd.conf
+    mode: 0644
+    owner: root
+    group: root
+
+- lineinfile:
+    path: /etc/default/hostapd
+    line: DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+- blockinfile:
+    path: /etc/dnsmasq.conf
+    block: |
+      #AutoHotspot Config
+      #stop DNSmasq from using resolv.conf
+      no-resolv
+      #Interface to use
+      interface=wlan0
+      bind-interfaces
+      dhcp-range=10.0.0.50,10.0.0.150,1h
+
+- lineinfile:
+    path: /etc/dhcpcd.conf
+    line: nohook wpa_supplicant
+
+- copy:
+    src: autohotspot.service
+    dest: /etc/systemd/system/autohotspot.service
+    mode: 0644
+    owner: root
+    group: root
+
+- systemd:
+    name: autohotspot.service
+    enabled: true
+
+- copy:
+    src: autohotspot
+    dest: /usr/bin/autohotspot
+    mode: 0755
+    owner: root
+    group: root

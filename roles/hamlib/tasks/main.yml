@@ -1,0 +1,26 @@
+- get_url:
+    url: https://github.com/Hamlib/Hamlib/releases/download/{{ hamlib_version }}/hamlib-{{ hamlib_version }}.tar.gz
+    dest: /home/pi/Downloads/hamlib.tar.gz
+
+- unarchive:
+    remote_src: true
+    src: /home/pi/Downloads/hamlib.tar.gz
+    dest: /home/pi/Downloads/
+    creates: /home/pi/Downloads/hamlib-4.2
+
+- shell:
+    cmd: ./configure
+    chdir: /home/pi/Downloads/hamlib-{{ hamlib_version }}
+    creates: /home/pi/Downloads/hamlib-{{ hamlib_version }}/Makefile
+
+- shell:
+    cmd: make -j4
+    chdir: /home/pi/Downloads/hamlib-{{ hamlib_version }}
+    creates: /home/pi/Downloads/hamlib-{{ hamlib_version }}/src/rigctl
+
+- shell:
+    cmd: make install
+    chdir: /home/pi/Downloads/hamlib-{{ hamlib_version }}
+    creates: /usr/bin/rigctl
+
+- shell: ldconfig

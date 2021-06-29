@@ -1,0 +1,18 @@
+- apt:
+    name:
+      - nginx-light
+      - nginx-common
+    state: latest
+
+- copy:
+    src: default
+    dest: /etc/nginx/sites-available/default
+
+- file:
+    src: /home/pi/.fldigi/images
+    dest: /var/www/html/fldigi
+    state: link
+
+- systemd:
+    name: nginx
+    state: restarted

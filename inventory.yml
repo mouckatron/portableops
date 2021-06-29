@@ -1,0 +1,10 @@
+p891:
+  hosts:
+    portableops:
+      ansible_host: 192.168.0.141
+      ansible_user: pi
+p705:
+  hosts:
+    portableops705:
+      ansible_host: 192.168.0.142
+      ansible_user: pi

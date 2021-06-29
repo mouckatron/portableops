@@ -1,0 +1,11 @@
+- get_url:
+    url: http://files.js8call.com/2.2.0/js8call_{{ js8call_version }}_armhf.deb
+    dest: /home/pi/Downloads/js8call.deb
+
+- apt:
+    deb: /home/pi/Downloads/js8call.deb
+    state: present
+
+- copy:
+    src: JS8CALL.desktop
+    dest: /home/pi/Desktop/JS8CALL.desktop

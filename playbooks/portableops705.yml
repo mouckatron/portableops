@@ -1,0 +1,39 @@
+- hosts: p705
+  become: true
+  vars:
+    hostname: portableops705
+    gps_device: /dev/ttyACM1
+    fldigi_version: 4.1.19
+    flrig_version: 1.4.0
+    js8call_version: 2.2.0
+    wsjtx_version: 2.4.0
+    hamlib_version: 4.2
+
+  roles:
+    - role: ../roles/osupdate
+      tags: ['base']
+    - role: ../roles/hostname
+      tags: ['base', 'hostname']
+    - role: ../roles/wifi
+      tags: ['base', 'wifi']
+    - role: ../roles/autohotspot
+      tags: ['wifi', 'hotspot']
+    - role: ../roles/gpstime
+      tags: ['gpstime']
+    - role: ../roles/hamlib
+      tags: ['ham', 'hamlib']
+    - role: ../roles/js8call
+      tags: ['ham', 'js8call']
+    - role: ../roles/js8call_utils
+      tags: ['ham', 'js8call', 'js8callutils']
+    - role: ../roles/fldigi
+      tags: ['ham', 'flsuite']
+    - role: ../roles/wsjtx
+      tags: ['ham', 'wsjtx']
+    - role: ../roles/nginx
+      tags: ['fileshare', 'nginx']
+
+  tasks:
+    - systemd:
+        name: vncserver-x11-serviced.service
+        state: enabled
