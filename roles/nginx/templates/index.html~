@@ -1,0 +1,7 @@
+<html>
+    <head>
+        <title>{{ ansible_hostname }}</title>
+    </head>
+    <body>
+    </body>
+</html>

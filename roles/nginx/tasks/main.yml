@@ -7,12 +7,40 @@
 - copy:
     src: default
     dest: /etc/nginx/sites-available/default
+  notify: restart nginx
 
 - file:
     src: /home/pi/.fldigi/images
     dest: /var/www/html/fldigi
     state: link
 
-- systemd:
-    name: nginx
-    state: restarted
+- file:
+    path: /var/www/html/index.nginx-debian.html
+    state: absent
+
+- template:
+    src: index.html
+    dest: /var/www/html/index.html
+
+- file:
+    path: /var/www/html/{{ item }}
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  loop:
+    - WeatherInformation
+    - RadioManuals
+    - RadioFrequencies
+
+- copy:
+    src: '{{ item }}'
+    dest: '/var/www/html/{{ item }}'
+  loop:
+    - WeatherInformation/deutch.pdf
+    - WeatherInformation/global.pdf
+    - RadioManuals/FT-891-Basic.pdf
+    - RadioManuals/FT-891-Advanced.pdf
+    - RadioManuals/IC-705-Basic.pdf
+    - RadioManuals/IC-705-Advanced.pdf
+    - RadioFrequencies/rsgb_band_plan_2021.pdf

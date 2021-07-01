@@ -30,6 +30,11 @@
     #   tags: ['ham', 'wsjtx']
     - role: ../roles/nginx
       tags: ['fileshare', 'nginx']
+    - role: ../roles/patwinlink
+      hamlib_rigid: 136
+      baud: 38400
+      device: /dev/ttyUSB0
+      tags: ['ham', 'pat']
 
   tasks:
     - systemd:

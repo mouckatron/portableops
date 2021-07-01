@@ -30,6 +30,12 @@
       tags: ['ham', 'flsuite']
     - role: ../roles/wsjtx
       tags: ['ham', 'wsjtx']
+    - role: ../roles/patwinlink
+      hamlib_rigid: 3085
+      civ: '0xA4'
+      baud: 9600
+      device: /dev/ttyACM0
+      tags: ['ham', 'pat']
     - role: ../roles/nginx
       tags: ['fileshare', 'nginx']
 

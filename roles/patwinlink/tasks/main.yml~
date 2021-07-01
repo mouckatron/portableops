@@ -1,0 +1,6 @@
+- apt:
+    name:
+      - gpsd
+      - libhamlib-utils
+    state: latest
+    update_cache: true

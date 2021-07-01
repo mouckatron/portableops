@@ -1,0 +1,54 @@
+- apt:
+    name:
+      - gpsd
+      - libhamlib-utils
+    state: latest
+    update_cache: true
+
+- get_url:
+    url: http://www.cantab.net/users/john.wiseman/Downloads/Beta/piardopc
+    dest: /usr/local/bin/ardopc
+
+- file:
+    path: /usr/local/bin/ardopc
+    mode: 0755
+    owner: root
+    group: root
+
+- lineinfile:
+    path: /home/pi/.asoundrc
+    line: 'pcm.ARDOP {type rate slave {pcm "hw:CARD=CODEC,DEV=0" rate 48000}}'
+    create: true
+
+- get_url:
+    url: https://github.com/la5nta/pat/releases/download/v0.10.0/pat_0.10.0_linux_armhf.deb
+    dest: /home/pi/Downloads/pat.deb
+
+- apt:
+    deb: /home/pi/Downloads/pat.deb
+    state: present
+
+- file:
+    path: /home/pi/.wl2k
+    state: directory
+    owner: pi
+    group: pi
+    mode: 0755
+
+- template:
+    src: pat_config.json.j2
+    dest: /home/pi/.wl2k/config.json
+    mode: 0644
+    owner: pi
+    group: pi
+
+- template:
+    src: run_pat.sh.j2
+    dest: /usr/local/bin/run_pat.sh
+    mode: 0755
+    owner: pi
+    group: pi
+
+- copy:
+    src: runpat.desktop
+    dest: /home/pi/Desktop/runpat.desktop

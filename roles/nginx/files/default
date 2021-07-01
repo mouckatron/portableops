@@ -17,6 +17,16 @@ server {
 		try_files $uri $uri/ =404;
 	}
 
+    location /RadioManuals/ {
+        autoindex on;
+    }
+    location /RadioFrequencies/ {
+        autoindex on;
+    }
+    location /WeatherInformation/ {
+        autoindex on;
+    }
+
     location /fldigi/ {
 		autoindex on;
 	}
