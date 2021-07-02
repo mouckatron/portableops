@@ -12,6 +12,8 @@
 - file:
     src: /home/pi/.fldigi/images
     dest: /var/www/html/fldigi
+    owner: www-data
+    group: www-data
     state: link
 
 - file:
@@ -21,12 +23,18 @@
 - template:
     src: index.html
     dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+
+- get_url:
+    url: https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf
+    dest: /var/www/html/MaterialIcons-Regular.ttf
 
 - file:
     path: /var/www/html/{{ item }}
     state: directory
-    owner: root
-    group: root
+    owner: www-data
+    group: www-data
     mode: 0755
   loop:
     - WeatherInformation
@@ -36,6 +44,9 @@
 - copy:
     src: '{{ item }}'
     dest: '/var/www/html/{{ item }}'
+    owner: www-data
+    group: www-data
+    mode: 0644
   loop:
     - WeatherInformation/deutch.pdf
     - WeatherInformation/global.pdf

@@ -1,14 +1,49 @@
 <html>
     <head>
         <title>{{ ansible_hostname }}</title>
+        <style type="text/css">
+         @font-face {
+             font-family: 'Material Icons';
+             font-style: normal;
+             font-weight: 400;
+             src: local('Material Icons'),
+             local('MaterialIcons-Regular'),
+             url(/MaterialIcons-Regular.ttf) format('truetype');
+         }
+         .material-icons {
+             font-family: 'Material Icons';
+             font-weight: normal;
+             font-style: normal;
+             font-size: 24px;
+             display: inline-block;
+             line-height: 1;
+             text-transform: none;
+             letter-spacing: normal;
+             word-wrap: normal;
+             white-space: nowrap;
+             direction: ltr;
+             -webkit-font-smoothing: antialiased;
+             text-rendering: optimizeLegibility;
+             -moz-osx-font-smoothing: grayscale;
+             font-feature-settings: 'liga';
+         }
+
+         body { margin-top: 50px; font-size: 2em; color: black; }
+         a { outline: none; text-decoration: none; display: block; padding: 0.5em 2em;}
+         a, a:visited, a:active { color: black; }
+         a:hover { background-color: #ddd; }
+         ul { width: 100%; max-width: 600px; display: block; margin: auto;}
+         li { display: block; text-align: left;}
+         li:odd { background-color: #ddd };
+        </style>
     </head>
     <body>
         <ul>
-            <li><a href="/fldigi/">Received Weather Images</a></li>
-            <li><a href="/filebrowser/">Browse Pi Home directory</a></li>
-            <li><a href="/WeatherInformation">Weather Information</a></li>
-            <li><a href="/RadioManuals" >Radio Manuals</a></li>
-            <li><a href="/RadioFrequencies" >Radio Frequencies/Band plan</a></li>
+            <li><a href="/fldigi/"><span class="material-icons">cloud</span> Received Weather Images</a></li>
+            <li><a href="/filebrowser/"><span class="material-icons">folder_open</span> Browse Pi Home directory</a></li>
+            <li><a href="/WeatherInformation"><span class="material-icons">picture_as_pdf</span> Weather Information</a></li>
+            <li><a href="/RadioManuals"><span class="material-icons">picture_as_pdf</span> Radio Manuals</a></li>
+            <li><a href="/RadioFrequencies"><span class="material-icons">picture_as_pdf</span> Radio Frequencies/Band plan</a></li>
         </ul>
     </body>
 </html>
