@@ -15,10 +15,15 @@
     owner: root
     group: root
 
-- lineinfile:
-    path: /home/pi/.asoundrc
-    line: 'pcm.ARDOP {type rate slave {pcm "hw:CARD=CODEC,DEV=0" rate 48000}}'
-    create: true
+- get_url:
+    url: https://www.cantab.net/users/john.wiseman/Downloads/Beta/piARDOP_GUI
+    dest: /usr/local/bin/ardop_gui
+
+- file:
+    path: /usr/local/bin/ardop_gui
+    mode: 0755
+    owner: root
+    group: root
 
 - get_url:
     url: https://github.com/la5nta/pat/releases/download/v0.10.0/pat_0.10.0_linux_armhf.deb

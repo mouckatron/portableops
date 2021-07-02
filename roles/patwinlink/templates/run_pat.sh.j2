@@ -43,6 +43,7 @@ echo 'You can also edit the OUTPUT_VOL variable at the top of this script for fu
 amixer -c ${CARDNUM} set PCM ${OUTPUT_VOL} > /dev/null
 ardopc > /tmp/ardopc.log &
 sleep 2;
+ardop_gui &
 
 echo;
 
@@ -57,7 +58,8 @@ read k;
 
 echo 'Cleaning up...';
 #rm -rf /tmp/pat-web-browser;
-killall pat;
+sudo killall pat;
+killall ardop_gui;
 killall ardopc;
-killall rigctld;
+sudo killall rigctld;
 sudo rigctl -m ${RIG} {% if civ is defined %}-c $CIV{% endif %} -r {{ device }} -s ${BAUD} T 0 #ensure we stop TX if it got stuck

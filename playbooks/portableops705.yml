@@ -38,6 +38,8 @@
       tags: ['ham', 'pat']
     - role: ../roles/nginx
       tags: ['fileshare', 'nginx']
+    - role: ../roles/filebrowser
+      tags: ['fileshare', 'filebrowser']
 
   tasks:
     - systemd:

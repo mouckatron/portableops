@@ -24,17 +24,21 @@
     #   tags: ['ham', 'hamlib']
     # - role: ../roles/js8call
     #   tags: ['ham', 'js8call']
+    - role: ../roles/js8call_utils
+      tags: ['ham', 'js8call', 'js8callutils']
     # - role: ../roles/fldigi
     #   tags: ['ham', 'flsuite', 'fldigi']
     # - role: ../roles/wsjtx
     #   tags: ['ham', 'wsjtx']
-    - role: ../roles/nginx
-      tags: ['fileshare', 'nginx']
     - role: ../roles/patwinlink
       hamlib_rigid: 136
       baud: 38400
       device: /dev/ttyUSB0
       tags: ['ham', 'pat']
+    - role: ../roles/nginx
+      tags: ['fileshare', 'nginx']
+    - role: ../roles/filebrowser
+      tags: ['fileshare', 'filebrowser']
 
   tasks:
     - systemd:
