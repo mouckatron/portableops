@@ -1,0 +1,23 @@
+- hosts: p2730
+  become: true
+  vars:
+    hostname: portableops2730
+    hamlib_version: 4.2
+
+  roles:
+    - role: ../roles/osupdate
+      tags: ['base']
+    - role: ../roles/hostname
+      tags: ['base', 'hostname']
+    - role: ../roles/wifi
+      tags: ['base', 'wifi']
+    - role: ../roles/autohotspot
+      tags: ['wifi', 'hotspot']
+    # - role: ../roles/gpstime
+    #   tags: ['gpstime']
+    - role: ../roles/hamlib
+      tags: ['ham', 'hamlib']
+    - role: ../roles/aprs
+      use_rigctl: false
+      use_micinput: true
+      tags: ['ham', 'aprs']

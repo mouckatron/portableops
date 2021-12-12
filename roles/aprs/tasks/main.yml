@@ -1,0 +1,57 @@
+---
+- apt:
+    name:
+      - git
+      - gcc
+      - g++
+      - make
+      - cmake
+      - libasound2-dev
+      - libudev-dev
+    state: latest
+
+- git:
+    repo: 'https://github.com/wb2osz/direwolf.git'
+    dest: /home/pi/direwolf.git
+    update: false
+  become_user: pi
+
+- file:
+    path: /home/pi/direwolf.git/build
+    state: directory
+  become_user: pi
+
+- shell:
+    chdir: /home/pi/direwolf.git/build
+    cmd: cmake ..
+  become_user: pi
+
+- shell:
+    chdir: /home/pi/direwolf.git/build
+    cmd: make -j4
+  become_user: pi
+
+- shell:
+    chdir: /home/pi/direwolf.git/build
+    cmd: make install
+
+- file:
+    path: /etc/direwolf
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+
+- template:
+    src: '{{ item }}'
+    dest: '/etc/direwolf/{{ item }}'
+    mode: 0755
+    owner: pi
+    group: pi
+  loop:
+    - run_aprs.sh
+    - direwolf.conf
+    - dw-start.sh
+
+# fix this
+- shell: wget https://project-downloads.drogon.net/wiringpi-latest.deb && dpkg -i wiringpi-latest.deb

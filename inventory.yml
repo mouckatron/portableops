@@ -8,3 +8,9 @@ p705:
     portableops705:
       ansible_host: 192.168.0.142
       ansible_user: pi
+
+p2730:
+  hosts:
+    portableops2730:
+      ansible_host: 192.168.0.143
+      ansible_user: pi
