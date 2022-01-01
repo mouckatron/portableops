@@ -8,6 +8,11 @@
     js8call_version: 2.2.0
     wsjtx_version: 2.4.0
     hamlib_version: 4.2
+    hamlib_rigid: 3085
+    hamlib_civ: '0xA4'
+    hamlib_baud: 9600
+    hamlib_device: /dev/ttyACM0
+    hamlib_output_volume: '59%'
 
   roles:
     - role: ../roles/osupdate
@@ -31,10 +36,6 @@
     - role: ../roles/wsjtx
       tags: ['ham', 'wsjtx']
     - role: ../roles/patwinlink
-      hamlib_rigid: 3085
-      civ: '0xA4'
-      baud: 9600
-      device: /dev/ttyACM0
       tags: ['ham', 'pat']
     - role: ../roles/nginx
       tags: ['fileshare', 'nginx']
