@@ -57,3 +57,33 @@
 - copy:
     src: runpat.desktop
     dest: /home/pi/Desktop/runpat.desktop
+
+- name: pre/post flight scripts
+  template:
+    src: '{{ item }}'
+    dest: /usr/local/bin/{{ item }}
+    mode: 0755
+    owner: root
+    group: root
+  loop:
+    - ardopc_preflight.sh
+    - ardopc_postflight.sh
+    - pat_preflight.sh
+    - pat_postflight.sh
+
+- name: ardopc/pat service files
+  template:
+    src: '{{ item }}.j2'
+    dest: /etc/systemd/system/{{ item }}
+    mode: 0644
+    owner: root
+    group: root
+  loop:
+  - ardopc.service
+  - pat-ardopc.service
+  - pat-ax25.service
+  - patwinlink.target
+
+- name: reload systemd
+  systemd:
+    daemon_reload: true

@@ -2,6 +2,9 @@
 Description=
 
 [Service]
+Type=simple
+User=root
+Group=root
 ExecStartPre=/usr/local/bin/rigctld_preflight.sh
-ExecStartPost=/usr/local/bin/rigctld_postflight.sh
+ExecStopPost=/usr/local/bin/rigctld_postflight.sh
 ExecStart=rigctld -m {{ hamlib_rigid }} -c {{ hamlib_civ }} -s {{ hamlib_baud }} -r {{ hamlib_device }}

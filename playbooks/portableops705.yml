@@ -37,6 +37,10 @@
       tags: ['ham', 'wsjtx']
     - role: ../roles/patwinlink
       tags: ['ham', 'pat']
+    - role: ../roles/aprs
+      use_rigctl: true
+      use_micinput: false
+      tags: ['ham', 'aprs']
     - role: ../roles/nginx
       tags: ['fileshare', 'nginx']
     - role: ../roles/filebrowser

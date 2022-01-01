@@ -8,32 +8,40 @@
       - cmake
       - libasound2-dev
       - libudev-dev
+      - libax25
+      - ax25-apps
+      - ax25-tools
     state: latest
 
-- git:
-    repo: 'https://github.com/wb2osz/direwolf.git'
-    dest: /home/pi/direwolf.git
-    update: false
-  become_user: pi
+- shell: which direwolf
+  register: direwolf_installed
 
-- file:
-    path: /home/pi/direwolf.git/build
-    state: directory
-  become_user: pi
+- when: direwolf_installed.rc != 0 or (direwolf_update is defined and direwolf_update == 'true')
+  block:
+  - git:
+      repo: 'https://github.com/wb2osz/direwolf.git'
+      dest: /home/pi/direwolf.git
+      update: false
+    become_user: pi
 
-- shell:
-    chdir: /home/pi/direwolf.git/build
-    cmd: cmake ..
-  become_user: pi
+  - file:
+      path: /home/pi/direwolf.git/build
+      state: directory
+    become_user: pi
 
-- shell:
-    chdir: /home/pi/direwolf.git/build
-    cmd: make -j4
-  become_user: pi
+  - shell:
+      chdir: /home/pi/direwolf.git/build
+      cmd: cmake ..
+    become_user: pi
 
-- shell:
-    chdir: /home/pi/direwolf.git/build
-    cmd: make install
+  - shell:
+      chdir: /home/pi/direwolf.git/build
+      cmd: make -j4
+    become_user: pi
+
+  - shell:
+      chdir: /home/pi/direwolf.git/build
+      cmd: make install
 
 - file:
     path: /etc/direwolf
@@ -55,3 +63,40 @@
 
 # fix this
 - shell: wget https://project-downloads.drogon.net/wiringpi-latest.deb && dpkg -i wiringpi-latest.deb
+
+- name: ax25 ports
+  block:
+    - file:
+        path: /etc/ax25
+        state: directory
+        owner: root
+        group: root
+        mode: 0755
+    - lineinfile:
+        path: /etc/ax25/axports
+        line: 'wl2k {{ callsign }} 0 255 7 Winlink'
+        create: true
+
+- name: ax25 config
+  blockinfile:
+    path: /etc/default/ax25
+    create: true
+    block: |
+      AXPORT=wl2k
+      HBAUD=1200
+      DEV=/tmp/kisstnc
+
+- name: Service files
+  copy:
+    src: '{{ item }}'
+    dest: /etc/systemd/system/{{ item }}
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - ax25.service
+    - direwolf.service
+
+- name: reload systemd
+  systemd:
+    daemon_reload: true

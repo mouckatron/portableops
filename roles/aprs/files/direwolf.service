@@ -1,0 +1,10 @@
+[Unit]
+Description=Direwolf AX.25 TNC
+Requires=rigctld.service
+After=rigctld.service
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=direwolf -X 16 -p -c /etc/direwolf/direwolf.conf

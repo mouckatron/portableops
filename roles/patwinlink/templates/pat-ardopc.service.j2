@@ -1,0 +1,13 @@
+[Unit]
+Description=Ardopc winlink TNC client
+Requires=ardopc.service
+After=ardopc.service
+PartOf=patwinlink.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+ExecStartPre=/usr/local/bin/pat_preflight.sh
+ExecStartPost=/usr/local/bin/pat_postflight.sh
+ExecStart=pat http -a 0.0.0.0:8080

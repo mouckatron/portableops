@@ -1,0 +1,13 @@
+[Unit]
+Description=Ardopc winlink TNC client
+Requires=rigctld.service
+After=rigctld.service
+PartOf=patwinlink.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+ExecStartPre=/usr/local/bin/ardopc_preflight.sh
+ExecStartPost=/usr/local/bin/ardopc_postflight.sh
+ExecStart=ardopc

@@ -21,3 +21,5 @@
       use_rigctl: false
       use_micinput: true
       tags: ['ham', 'aprs']
+    - role: ../roles/patwinlink
+      tags: ['ham', 'pat']

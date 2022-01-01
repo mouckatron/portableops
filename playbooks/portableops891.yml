@@ -20,8 +20,8 @@
       tags: ['wifi', 'hotspot']
     - role: ../roles/gpstime
       tags: ['gpstime']
-    # - role: ../roles/hamlib
-    #   tags: ['ham', 'hamlib']
+    - role: ../roles/hamlib
+      tags: ['ham', 'hamlib']
     # - role: ../roles/js8call
     #   tags: ['ham', 'js8call']
     - role: ../roles/js8call_utils
@@ -35,6 +35,13 @@
       baud: 38400
       device: /dev/ttyUSB0
       tags: ['ham', 'pat']
+    - role: ../roles/aprs
+      hamlib_rigid: 136
+      baud: 38400
+      device: /dev/ttyUSB0
+      use_rigctl: true
+      use_micinput: false
+      tags: ['ham', 'aprs']
     - role: ../roles/nginx
       tags: ['fileshare', 'nginx']
     - role: ../roles/filebrowser

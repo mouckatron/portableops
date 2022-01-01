@@ -12,24 +12,24 @@ OUTPUT_VOL='59%'
 
 {% if use_rigctl %}
 RIG='{{ hamlib_rigid }}' # IC-7300 (& IC-705, but change the CI-V address in your 705 to 94.
-{% if civ is defined %}
+{% if hamilb_civ is defined %}
 CIV='{{ civ }}'
 {% endif %}
 # run `rigctl -l` to find a list of other radio models and swap the 373 here with that number.
 # Note that this script was writtin for and currently only supports the IC-705.
 # You'll need to additionally update your Ardop config and also your ~/.wl2k/config.json file to use a different rig.
 
-BAUD={{ baud }}
+BAUD={{ hamlib_baud }}
 
 echo 'Initiating connection with rig...';
-sudo rigctl -m ${RIG} {% if civ is defined %}-c $CIV{% endif %} -r {{ device }} -s ${BAUD} f >/dev/null 2>&1
+sudo rigctl -m ${RIG} {% if hamlib_civ is defined %}-c $CIV{% endif %} -r {{ hamlib_device }} -s ${BAUD} f >/dev/null 2>&1
 if [ "$?" -ne "0" ]; then
-  echo 'Could not initiate connection with rig on {{ device }}. Is it plugged in, with the correct CI-V address set?';
+  echo 'Could not initiate connection with rig on {{ hamlib_device }}. Is it plugged in, with the correct CI-V address set?';
   read -p 'Hit Enter or close this terminal window.' k; #TODO: Only show these prompts when launched from desktop
   echo 'Exiting.';
   exit;
 fi
-sudo rigctld -m ${RIG} {% if civ is defined %}-c $CIV{% endif %} -r {{ device }} -s ${BAUD} > /tmp/rigctl.log &
+sudo rigctld -m ${RIG} {% if hamlib_civ is defined %}-c $CIV{% endif %} -r {{ hamlib_device }} -s ${BAUD} > /tmp/rigctl.log &
 sleep 2;
 {% endif %} # use_rigctl
 
@@ -60,5 +60,5 @@ echo 'Cleaning up...';
 sudo killall direwolf;
 {% if use_rigctl %}
 sudo killall rigctld;
-sudo rigctl -m ${RIG} {% if civ is defined %}-c $CIV{% endif %} -r {{ device }} -s ${BAUD} T 0 #ensure we stop TX if it got stuck
+sudo rigctl -m ${RIG} {% if hamlib_civ is defined %}-c $CIV{% endif %} -r {{ hamlib_device }} -s ${BAUD} T 0 #ensure we stop TX if it got stuck
 {% endif %} # use_rigctl
