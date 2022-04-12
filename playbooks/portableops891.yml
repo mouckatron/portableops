@@ -16,6 +16,8 @@
       tags: ['base', 'hostname']
     - role: ../roles/wifi
       tags: ['base', 'wifi']
+    - role: ../roles/rpi-clone
+      tags: ['base', 'rpi-clone']
     - role: ../roles/autohotspot
       tags: ['wifi', 'hotspot']
     - role: ../roles/gpstime
