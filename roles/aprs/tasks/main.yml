@@ -15,6 +15,7 @@
 
 - shell: which direwolf
   register: direwolf_installed
+  ignore_errors: true
 
 - when: direwolf_installed.rc != 0 or (direwolf_update is defined and direwolf_update == 'true')
   block:
