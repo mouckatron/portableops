@@ -1,5 +1,5 @@
 - get_url:
-    url: https://physics.princeton.edu/pulsar/k1jt/wsjtx_{{ wsjtx_version }}_armhf.deb
+    url: https://physics.princeton.edu/pulsar/k1jt/wsjtx_{{ wsjtx_version }}.deb
     dest: /home/pi/Downloads/wsjtx.deb
 
 - apt:

@@ -6,7 +6,7 @@
     fldigi_version: 4.1.19
     flrig_version: 1.4.0
     js8call_version: 2.2.0
-    wsjtx_version: 2.4.0
+    wsjtx_version: 2.5.4_armhf
     hamlib_version: 4.2
 
   roles:
@@ -22,6 +22,8 @@
       tags: ['wifi', 'hotspot']
     - role: ../roles/gpstime
       tags: ['gpstime']
+    - role: ../roles/cockpit
+      tags: ['base', 'cockpit']
     - role: ../roles/hamlib
       tags: ['ham', 'hamlib']
     # - role: ../roles/js8call
@@ -30,8 +32,8 @@
       tags: ['ham', 'js8call', 'js8callutils']
     # - role: ../roles/fldigi
     #   tags: ['ham', 'flsuite', 'fldigi']
-    # - role: ../roles/wsjtx
-    #   tags: ['ham', 'wsjtx']
+    - role: ../roles/wsjtx
+      tags: ['ham', 'wsjtx']
     - role: ../roles/patwinlink
       hamlib_rigid: 136
       baud: 38400
