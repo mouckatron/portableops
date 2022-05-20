@@ -4,6 +4,7 @@ After=multi-user.target
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/autohotspot
+ExecStart=/usr/bin/autohotspot {% if hotspot_host_ip is defined %}{{ hotspot_host_ip }}{% endif %}
+
 [Install]
 WantedBy=multi-user.target

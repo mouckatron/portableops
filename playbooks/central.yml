@@ -1,0 +1,31 @@
+- hosts: central
+  become: true
+  vars:
+    hostname: centralops
+    gps_device: /dev/ttyACM1
+
+  roles:
+    - role: ../roles/osupdate
+      tags: ['base']
+    - role: ../roles/hostname
+      tags: ['base', 'hostname']
+    - role: ../roles/wifi
+      tags: ['base', 'wifi']
+    - role: ../roles/rpi-clone
+      tags: ['base', 'rpi-clone']
+    - role: ../roles/autohotspot
+      hotspot_host_ip: 192.168.0.140
+      tags: ['wifi', 'hotspot']
+    - role: ../roles/gpstime
+      tags: ['gpstime']
+    - role: ../roles/cockpit
+      tags: ['base', 'cockpit']
+    - role: ../roles/nginx
+      tags: ['fileshare', 'nginx']
+    - role: ../roles/filebrowser
+      tags: ['fileshare', 'filebrowser']
+
+  tasks:
+    - systemd:
+        name: vncserver-x11-serviced.service
+        state: enabled

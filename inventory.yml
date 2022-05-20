@@ -1,3 +1,8 @@
+central:
+  hosts:
+    centralops:
+      ansible_host: 192.168.0.140
+      ansible_user: pi
 p891:
   hosts:
     portableops:
