@@ -13,10 +13,6 @@
       tags: ['base', 'wifi']
     - role: ../roles/autohotspot
       tags: ['wifi', 'hotspot']
-    # - role: ../roles/gpstime
-    #   tags: ['gpstime']
-    - role: ../roles/hamlib
-      tags: ['ham', 'hamlib']
     - role: ../roles/aprs
       use_rigctl: false
       use_micinput: true
